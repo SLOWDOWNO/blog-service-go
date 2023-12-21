@@ -1,6 +1,6 @@
 package model
 
-// 公共model
+// 公共 model
 type Model struct {
 	ID         uint32 `gorm:"primary_key" json:"id"`
 	CreatedBy  string `json:"created_by"`
@@ -11,7 +11,7 @@ type Model struct {
 	IsDel      uint8  `json:"is_del"`
 }
 
-// Tag Model
+// 标签 model
 type Tag struct {
 	*Model
 	Name  string `json:"name"`
@@ -22,7 +22,7 @@ func (t Tag) TableName() string {
 	return "blog_tag"
 }
 
-// Article Model
+// 文章 model
 type Article struct {
 	*Model
 	Title         string `json:"title"`
@@ -36,7 +36,7 @@ func (a Article) TableName() string {
 	return "blog_article"
 }
 
-// ArticleTag Modle
+// 文章标签 model
 type ArticleTag struct {
 	*Model
 	TagID     uint32 `json:"tag_id"`

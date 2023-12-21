@@ -1,4 +1,4 @@
-module github.com/go-programming-tour-book/blog-service
+module github.com/SLOWDOWNO/blog-service-go
 
 go 1.21.5
 

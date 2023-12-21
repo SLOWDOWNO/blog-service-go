@@ -1,8 +1,8 @@
 package routers
 
 import (
+	v1 "github.com/SLOWDOWNO/blog-service-go/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
-	v1 "github.com/go-programming-tour-book/blog-service/internal/routers/api/v1"
 )
 
 func NewRouter() *gin.Engine {
@@ -12,12 +12,12 @@ func NewRouter() *gin.Engine {
 
 	article := v1.NewArticle()
 	tag := v1.NewTag()
-
 	apiv1 := r.Group("/api/v1")
 	{
 		apiv1.POST("/tags", tag.Create)
 		apiv1.DELETE("/tags/:id", tag.Delete)
 		apiv1.PUT("/tags/:id", tag.Update)
+		apiv1.PATCH("/tags/:id/state", tag.Update)
 		apiv1.GET("/tags", tag.List)
 
 		apiv1.POST("/articles", article.Create)
@@ -27,5 +27,6 @@ func NewRouter() *gin.Engine {
 		apiv1.GET("/articles/:id", article.Get)
 		apiv1.GET("/articles", article.List)
 	}
+
 	return r
 }

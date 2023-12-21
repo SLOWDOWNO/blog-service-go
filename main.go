@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-programming-tour-book/blog-service/internal/routers"
+	"github.com/SLOWDOWNO/blog-service-go/internal/routers"
 )
 
 func main() {
