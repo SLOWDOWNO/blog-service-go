@@ -1,6 +1,6 @@
 Server:
   RunMode: debug
-  HttpPort: 8000
+  HttpPort: 8080
   ReadTimeout: 60
   WriteTimeout: 60
 App:
@@ -11,9 +11,9 @@ App:
   LogFileExt: .log
 Database:
   DBType: mysql
-  Username: root  # 填写你的数据库账号
-  Password:       # 填写你的数据库密码
-  Host: 127.0.0.1:3306
+  Username: alexshi  # 填写你的数据库账号
+  Password: s20021026.      # 填写你的数据库密码
+  Host: localhost:3306
   DBName: blog_service
   TablePrefix: blog_
   Charset: utf8

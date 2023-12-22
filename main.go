@@ -8,7 +8,10 @@ import (
 	"github.com/SLOWDOWNO/blog-service-go/global"
 	"github.com/SLOWDOWNO/blog-service-go/internal/model"
 	"github.com/SLOWDOWNO/blog-service-go/internal/routers"
+	"github.com/SLOWDOWNO/blog-service-go/pkg/logger"
 	"github.com/SLOWDOWNO/blog-service-go/pkg/setting"
+	_ "github.com/go-sql-driver/mysql"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 // 初始化全局变量
@@ -20,7 +23,11 @@ func init() {
 
 	err = setupDBEngine()
 	if err != nil {
-		log.Fatal("init.setupDBEngine err: %v", err)
+		log.Fatalf("init.setupDBEngine err: %v", err)
+	}
+	err = setUpLogger()
+	if err != nil {
+		log.Fatalf("init.setupLogger err: %v", err)
 	}
 }
 
@@ -34,6 +41,7 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	s.ListenAndServe()
+	global.Logger.Infof("%s: go-programming-tour-book/%s", "eddycjy", "blog-service")
 }
 
 // setupSetting函数用于设置全局配置。
@@ -68,6 +76,17 @@ func setupDBEngine() error {
 	if err != nil {
 		return err
 	}
+
+	return nil
+}
+
+func setUpLogger() error {
+	global.Logger = logger.NewLogger(&lumberjack.Logger{
+		Filename:  global.AppSetting.LogSavePath + "/" + global.AppSetting.LogFileName + global.AppSetting.LogFileExt,
+		MaxSize:   600,
+		MaxAge:    10,
+		LocalTime: true,
+	}, "", log.LstdFlags).WithCaller(2)
 
 	return nil
 }
